@@ -1,0 +1,46 @@
+一、基础知识
+	1) '.' 		单个字符通配符；
+	2) '[]' 	单个字符选择域（其中的字符均是以单个字符的形式存在和发挥作用，只能选择其中之一）
+	3) '(|)' 	或，指定字符域内选择；
+	4) '-' 		从...到...，表示连续变化的范围；
+	
+	表示匹配次数：用来确定紧靠该符号左边的符号出现的次数。
+	5) '*' 		0次或多次
+	6) '+'		1次或多次
+	7) '?'		0次或1次
+	8) '{n}'	恰好n次
+	9) '{n,m}'	从n次到m次
+	
+	否定意思：
+	10) '^'		“否”，表示不想要匹配的字符
+	11) '^'和'$'	表示匹配字符串的开始和结束。
+
+	转义字符：
+	12) '\s'		空白符号，匹配空格符、Tab、换行符，[\n\r\t\f]
+	13) '\S'		非空白符号，匹配空格符、Tab、换行符，[^\n\r\t\f]
+	14) '\d'		[0-9]
+	15) '\D'		[^0-9]
+	16) '\w'		[a-zA-Z0-9]
+	17) '\W'		[^a-zA-Z0-9]
+	18) '\t'		Tab
+	19) '\n'		换行
+	20) '\r'		回车
+	21) '\f'		换页
+	
+	字符：
+	22) '\\\\'	\(最好独立书写)
+	23) '\-'	-
+	24) '\.'	.
+
+二、Jakarta-ORO正则表达式库
+	PatternCompiler compiler = new Perl5Compiler();
+	Pattern pattern = null;
+	try {
+		pattern = compiler.compile("ragex");
+	} catch(MalformedPatternException e) {
+		e.printStackTrace();
+	}
+	PatternMatcher matcher = new Perl5Matcher();
+	boolean result = matcher.matches(string, pattern);
+
+三、实际应用
