@@ -1,0 +1,49 @@
+一、继承关系
+	java.lang.Object
+		java.awt.Component 实现 ImageObserver, MenuContainer, Serializable 接口
+			java.awt.Container
+				java.awt.Window 没有边界和菜单栏的顶层窗口。窗口的默认布局是 BorderLayout。
+					java.awt.Dialog
+						javax.swing.JDialog 有标题和边框的顶层窗口，不可最小化或还原；默认BorderLayout
+					java.awt.Frame
+						javax.swing.JFrame 有标题和边框的顶层窗口，可最小化或还原；默认BorderLayout
+					javax.swing.JWindow 没有标题栏、窗口管理按钮或者其他与 JFrame关联的修饰
+					
+				javax.swing.JComponent 除顶层容器外所有 Swing 组件的基类。
+					绝大部分的J组件
+					
+				java.awt.Panel 是最简单的容器类，默认FlowLayout
+					java.applet.Applet
+					
+				java.awt.ScrollPane 用于单个子组件的自动水平和/或垂直滚动的容器类
+
+二、JFrame
+	JFrame —— Frame
+		JRootPane —— JComponent
+			JPanel —— ContentPane
+			
+三、JDialog
+	JDialog —— Dialog
+		JRootPane —— JComponent
+			JPanel —— ContentPane
+			
+四、SwingWorker 开启后台计算线程
+	SwingWorker 被设计为只执行一次。多次执行 SwingWorker 将不会调用两次 doInBackground()方法。 doInBackground()方法完成后，执行 done()方法。
+		doInBackground():执行后台运算
+		done():开启事件指派线程，刷新前端界面
+		get():返回doInBackground()的执行结果状态；
+
+	在专用线程中执行长时间 GUI交互任务的抽象类。 
+
+	使用 Swing 编写多线程应用程序时，要记住两个约束条件： 
+		1).不应该在 事件指派线程(Swing的前端界面线程)上运行耗时任务。否则应用程序将无响应。 
+		2).只能在事件指派线程上访问 Swing组件。 
+
+	这些约束意味着需要时间密集计算操作的 GUI应用程序至少需要以下两个线程：
+		1).执行长时间任务的线程——SwingWorker的价值； 
+		2).所有 GUI相关活动的事件指派线程（EDT）这涉及到难以实现的线程间通信。 
+
+	SwingWorker 设计用于需要在后台线程中运行长时间运行任务的情况，并可在完成后或者在处理过程中向 UI提供更新。
+	SwingWorker 的子类必须实现 doInBackground()方法，以执行后台计算。
+	
+五、
